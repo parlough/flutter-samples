@@ -2,14 +2,10 @@
 
 set -e
 
-gradle -v
 flutter doctor -v
 
 echo "Fetching dependencies and building 'prebuilt_module/flutter_module/'."
 pushd add_to_app/prebuilt_module/android_using_prebuilt_module/
-gradle wrapper --gradle-version=7.4 --distribution-type=all
-popd
-pushd add_to_app/prebuilt_module/flutter_module/
 flutter packages get
 flutter build aar
 popd
@@ -41,7 +37,7 @@ do
     echo "== Testing '${PROJECT_NAME}' on Flutter's stable channel =="
     pushd "${PROJECT_NAME}"
 
-    gradle wrapper --gradle-version=7.4 --distribution-type=all
+    gradle wrapper
     ./gradlew --stacktrace assembleDebug
     ./gradlew --stacktrace assembleRelease
 
